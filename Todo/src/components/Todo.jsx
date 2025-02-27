@@ -18,6 +18,13 @@ export function Todo() {
         setData([...data, { task: input, status: select }])
         setInput("")
     }
+
+    function handleTask(id) {
+        let deleteddata = data.filter((_,index) => {
+            return index !==id
+        })
+        setData(deleteddata)
+    }
     return (
         <>
             <h1>Todo</h1>
@@ -35,7 +42,8 @@ export function Todo() {
                         return (
                           <div key={id} className="child">
                                 <h1>Task: {ele.task}</h1>
-                                <h2>Status: {ele.status }</h2>
+                                <h2>Status: {ele.status}</h2>
+                                <button onClick={()=>handleTask(id)}>Delete task</button>
                           </div>
                         );
                     })
