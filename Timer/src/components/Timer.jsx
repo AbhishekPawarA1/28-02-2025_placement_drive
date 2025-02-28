@@ -1,10 +1,12 @@
+import { useEffect } from "react";
 import { useRef, useState } from "react"
 
 export function Timer() {
 
     let [time, setTime] = useState(0)
     let [isrunnig,setIsRunnig]=useState(false)
-    let ref=useRef(null)
+  let ref = useRef(null)
+  
     
     function handleStart() {
         if (!ref.current && time==0) {
@@ -34,7 +36,14 @@ export function Timer() {
           }, 10);
             setIsRunnig(true);
         }
-    }
+  }
+  
+  useEffect(() => {
+    return () => {
+      clearInterval(ref.current);
+    };
+  }, []);
+
 
     let hr = Math.floor(time / 3600000)
     let min = Math.floor((time % 3600000) / 60000)
